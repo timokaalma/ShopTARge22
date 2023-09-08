@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopTARge22.Core.Dto;
 using ShopTARge22.Data;
 using ShopTARge22.Models.Spaceships;
 
@@ -30,6 +31,36 @@ namespace ShopTARge22.Controllers
                 });
 
             return View(result);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            SpaceshipCreateViewModel result = new SpaceshipCreateViewModel();
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(SpaceshipCreateViewModel vm)
+        {
+            var dto = new SpaceshipDto()
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                Type = vm.Type,
+                Passengers = vm.Passengers,
+                BuiltDate = vm.BuiltDate,
+                CargoWeight = vm.CargoWeight,
+                Crew = vm.Crew,
+                EnginePower = vm.EnginePower,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt
+            };
+
+            //
+
+            return RedirectToAction("Index");
         }
     }
 }
