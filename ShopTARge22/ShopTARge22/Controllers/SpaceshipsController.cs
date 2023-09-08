@@ -29,7 +29,7 @@ namespace ShopTARge22.Controllers
                     Passengers = x.Passengers
                 });
 
-            return View();
+            return View(result);
         }
     }
 }
