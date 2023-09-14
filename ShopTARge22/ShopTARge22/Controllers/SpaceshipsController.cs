@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopTARge22.Core.Dto;
+using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
 using ShopTARge22.Models.Spaceships;
 
@@ -8,13 +9,16 @@ namespace ShopTARge22.Controllers
     public class SpaceshipsController : Controller
     {
         private readonly ShopTARge22Context _context;
+        private readonly ISpaceshipsServices _spaceshipServices;
 
         public SpaceshipsController
             (
-                ShopTARge22Context context
+                ShopTARge22Context context,
+                ISpaceshipsServices spaceshipsServices
             )
         {
             _context = context;
+            _spaceshipServices = spaceshipsServices;
         }
 
 
@@ -58,9 +62,14 @@ namespace ShopTARge22.Controllers
                 ModifiedAt = vm.ModifiedAt
             };
 
-            //
+            var result = await _spaceshipServices.Create(dto);
 
-            return RedirectToAction("Index");
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index), vm);
         }
     }
 }

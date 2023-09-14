@@ -1,10 +1,14 @@
 using ShopTARge22.Data;
 using Microsoft.EntityFrameworkCore;
+using ShopTARge22.Core.ServiceInterface;
+using ShopTARge22.ApplicationServices.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
 
 builder.Services.AddDbContext<ShopTARge22Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
