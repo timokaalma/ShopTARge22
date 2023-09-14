@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShopTARge22.ApplicationServices\ShopTARge22.ApplicationServices.csproj" />
     <ProjectReference Include="..\ShopTARge22.Data\ShopTARge22.Data.csproj" />
   </ItemGroup>
 
