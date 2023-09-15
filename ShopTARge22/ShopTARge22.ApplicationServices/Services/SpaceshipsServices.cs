@@ -49,6 +49,28 @@ namespace ShopTARge22.ApplicationServices.Services
             return result;
         }
 
+        public async Task<Spaceship> Update(SpaceshipDto dto)
+        {
+            var domain = new Spaceship()
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Type = dto.Type,
+                BuiltDate = dto.BuiltDate,
+                Passengers = dto.Passengers,
+                CargoWeight = dto.CargoWeight,
+                Crew = dto.Crew,
+                EnginePower = dto.EnginePower,
+                CreatedAt = dto.CreatedAt,
+                ModifiedAt = DateTime.Now,
+            };
+
+            _context.Spaceships.Update(domain);
+            await _context.SaveChangesAsync();
+
+            return domain;
+        }
+
         public async Task<Spaceship> Delete(Guid id)
         {
             var spaceshipId = await _context.Spaceships

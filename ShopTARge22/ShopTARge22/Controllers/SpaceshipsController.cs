@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopTARge22.Core.Domain;
 using ShopTARge22.Core.Dto;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
@@ -40,13 +41,13 @@ namespace ShopTARge22.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            SpaceshipCreateViewModel result = new SpaceshipCreateViewModel();
+            SpaceshipCreateUpdateViewModel result = new SpaceshipCreateUpdateViewModel();
 
-            return View(result);
+            return View("CreateUpdate", result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SpaceshipCreateViewModel vm)
+        public async Task<IActionResult> Create(SpaceshipCreateUpdateViewModel vm)
         {
             var dto = new SpaceshipDto()
             {
@@ -63,6 +64,60 @@ namespace ShopTARge22.Controllers
             };
 
             var result = await _spaceshipServices.Create(dto);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index), vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var spaceship = await _spaceshipServices.DetailsAsync(id);
+
+            if (spaceship == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new SpaceshipCreateUpdateViewModel();
+
+            vm.Id = spaceship.Id;
+            vm.Name = spaceship.Name;
+            vm.Type = spaceship.Type;
+            vm.BuiltDate = spaceship.BuiltDate;
+            vm.Passengers = spaceship.Passengers;
+            vm.CargoWeight = spaceship.CargoWeight;
+            vm.Crew = spaceship.Crew;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.CreatedAt = spaceship.CreatedAt;
+            vm.ModifiedAt = spaceship.ModifiedAt;
+
+
+            return View("CreateUpdate", vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(SpaceshipCreateUpdateViewModel vm)
+        {
+            var dto = new SpaceshipDto()
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                Type = vm.Type,
+                BuiltDate = vm.BuiltDate,
+                Passengers = vm.Passengers,
+                CargoWeight = vm.CargoWeight,
+                Crew = vm.Crew,
+                EnginePower = vm.EnginePower,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt
+            };
+
+            var result = await _spaceshipServices.Update(dto);
 
             if (result == null)
             {
