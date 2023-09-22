@@ -1,8 +1,9 @@
 ﻿@model ShopTARge22.Models.Spaceships.ImageViewModel
 
 @{
-    var photoPaths = "~/multipleFileUpload/" + (Model.FilePath ?? "noimage.jpg");
+    var photoPaths = "~/wwwroot/" + (Model.FilePath ?? "noimage.jpg");
     //var photoPaths = "C:/dev/ShopTARge22/ShopTARge22/ShopTARge22/multipleFileUpload" + (Model.FilePath ?? "noimage.jpg");
+    //var photoPaths = "../wwwroot/" + Model.ImageId.ToString();
 }
 
 <div class="form-group row col-sm-4 offset-2">

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopTARge22.Data;
 
@@ -11,9 +12,10 @@ using ShopTARge22.Data;
 namespace ShopTARge22.Data.Migrations
 {
     [DbContext(typeof(ShopTARge22Context))]
-    partial class ShopTARge22ContextModelSnapshot : ModelSnapshot
+    [Migration("20230922054127_RealEstate")]
+    partial class RealEstate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +39,7 @@ namespace ShopTARge22.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileToApis", (string)null);
+                    b.ToTable("FileToApis");
                 });
 
             modelBuilder.Entity("ShopTARge22.Core.Domain.RealEstate", b =>
@@ -74,7 +76,7 @@ namespace ShopTARge22.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RealEstates", (string)null);
+                    b.ToTable("RealEstates");
                 });
 
             modelBuilder.Entity("ShopTARge22.Core.Domain.Spaceship", b =>
@@ -114,7 +116,7 @@ namespace ShopTARge22.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Spaceships", (string)null);
+                    b.ToTable("Spaceships");
                 });
 #pragma warning restore 612, 618
         }

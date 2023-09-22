@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-
-namespace ShopTARge22.Core.Domain
+﻿namespace ShopTARge22.Models.RealEstates
 {
-    public class RealEstate
+    public class RealEstateDetailsViewModel
     {
-        [Key]
         public Guid? Id { get; set; }
         public string Address { get; set; }
         public float SizeSqrM { get; set; }
@@ -15,6 +11,6 @@ namespace ShopTARge22.Core.Domain
         public DateTime BuiltInYear { get; set; }
 
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set;}
+        public DateTime UpdatedAt { get; set; }
     }
 }
