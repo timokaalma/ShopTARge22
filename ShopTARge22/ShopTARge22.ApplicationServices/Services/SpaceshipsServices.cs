@@ -56,19 +56,19 @@ namespace ShopTARge22.ApplicationServices.Services
 
         public async Task<Spaceship> Update(SpaceshipDto dto)
         {
-            var domain = new Spaceship()
-            {
-                Id = dto.Id,
-                Name = dto.Name,
-                Type = dto.Type,
-                BuiltDate = dto.BuiltDate,
-                Passengers = dto.Passengers,
-                CargoWeight = dto.CargoWeight,
-                Crew = dto.Crew,
-                EnginePower = dto.EnginePower,
-                CreatedAt = dto.CreatedAt,
-                ModifiedAt = DateTime.Now,
-            };
+            Spaceship domain = new();
+
+            domain.Id = dto.Id;
+            domain.Name = dto.Name;
+            domain.Type = dto.Type;
+            domain.BuiltDate = dto.BuiltDate;
+            domain.Passengers = dto.Passengers;
+            domain.CargoWeight = dto.CargoWeight;
+            domain.Crew = dto.Crew;
+            domain.EnginePower = dto.EnginePower;
+            domain.CreatedAt = dto.CreatedAt;
+            domain.ModifiedAt = DateTime.Now;
+            _fileServices .FilesToApi(dto, domain);
 
             _context.Spaceships.Update(domain);
             await _context.SaveChangesAsync();
