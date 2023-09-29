@@ -48,6 +48,8 @@ namespace ShopTARge22.ApplicationServices.Services
             }
         }
 
+
+
         public void FilesToApi(SpaceshipDto dto, Spaceship spaceship)
         {
 
