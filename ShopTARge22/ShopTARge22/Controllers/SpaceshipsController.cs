@@ -11,15 +11,18 @@ namespace ShopTARge22.Controllers
     {
         private readonly ShopTARge22Context _context;
         private readonly ISpaceshipsServices _spaceshipServices;
+        private readonly IFileServices _fileServices;
 
         public SpaceshipsController
             (
                 ShopTARge22Context context,
-                ISpaceshipsServices spaceshipsServices
+                ISpaceshipsServices spaceshipsServices,
+                IFileServices fileServices
             )
         {
             _context = context;
             _spaceshipServices = spaceshipsServices;
+            _fileServices = fileServices;
         }
 
 
@@ -133,6 +136,7 @@ namespace ShopTARge22.Controllers
                 EnginePower = vm.EnginePower,
                 CreatedAt = vm.CreatedAt,
                 ModifiedAt = vm.ModifiedAt,
+                Files = vm.Files,
                 FileToApiDtos = vm.Image
                     .Select(x => new FileToApiDto
                     {
@@ -197,6 +201,14 @@ namespace ShopTARge22.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FileToApis
+                .Where(x => x.SpaceshipId == id)
+                .Select(y => new ImageViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id
+                }).ToArrayAsync();
+
             var vm = new SpaceshipDeleteViewModel();
 
             vm.Id = spaceship.Id;
@@ -209,7 +221,7 @@ namespace ShopTARge22.Controllers
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
             vm.ModifiedAt = spaceship.ModifiedAt;
-
+            vm.ImageViewModels.AddRange(images);
 
             return View(vm);
         }
@@ -220,6 +232,24 @@ namespace ShopTARge22.Controllers
             var spaceshipId = await _spaceshipServices.Delete(id);
 
             if (spaceshipId == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(ImageViewModel vm)
+        {
+            var dto = new FileToApiDto()
+            {
+                Id = vm.ImageId
+            };
+
+            var image = await _fileServices.RemoveImageFromApi(dto);
+
+            if (image == null)
             {
                 return RedirectToAction(nameof(Index));
             }

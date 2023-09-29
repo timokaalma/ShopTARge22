@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopTARge22.Core.Dto;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
 using ShopTARge22.Models.RealEstates;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ShopTARge22.Controllers
 {
@@ -49,6 +51,17 @@ namespace ShopTARge22.Controllers
                 return NotFound();
             }
 
+            var photos = await _context.FileToDatabases
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new RealEstateImageViewModel
+                {
+                    RealEstateId = y.Id,
+                    ImageId = y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
             var vm = new RealEstateDetailsViewModel();
 
             vm.Id = realEstate.Id;
@@ -60,6 +73,7 @@ namespace ShopTARge22.Controllers
             vm.BuiltInYear = realEstate.BuiltInYear;
             vm.CreatedAt = realEstate.CreatedAt;
             vm.UpdatedAt = realEstate.UpdatedAt;
+            vm.Image.AddRange(photos);
 
             return View(vm);
         }
@@ -86,6 +100,15 @@ namespace ShopTARge22.Controllers
                 BuiltInYear = vm.BuiltInYear,
                 CreatedAt = vm.CreatedAt,
                 UpdatedAt = vm.UpdatedAt,
+                Files = vm.Files,
+                Image = vm.Image
+                    .Select(x => new FileToDatabaseDto
+                    {
+                        Id = x.ImageId,
+                        ImageData = x.ImageData,
+                        ImageTitle = x.ImageTitle,
+                        RealEstateId = x.RealEstateId
+                    }).ToArray()
             };
 
             var result = await _realEstatesServices.Create(dto);
@@ -108,6 +131,17 @@ namespace ShopTARge22.Controllers
                 return NotFound();
             }
 
+            var photos = await _context.FileToDatabases
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new RealEstateImageViewModel
+                {
+                    RealEstateId = y.Id,
+                    ImageId = y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
             var vm = new RealEstateCreateUpdateViewModel();
 
             vm.Id = realEstate.Id;
@@ -119,6 +153,7 @@ namespace ShopTARge22.Controllers
             vm.BuiltInYear = realEstate.BuiltInYear;
             vm.CreatedAt = realEstate.CreatedAt;
             vm.UpdatedAt = realEstate.UpdatedAt;
+            vm.Image.AddRange(photos);
 
 
             return View("CreateUpdate", vm);
@@ -127,17 +162,28 @@ namespace ShopTARge22.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(RealEstateCreateUpdateViewModel vm)
         {
-            var dto = new RealEstateDto();
 
-            dto.Id = vm.Id;
-            dto.Address = vm.Address;
-            dto.SizeSqrM = vm.SizeSqrM;
-            dto.RoomCount = vm.RoomCount;
-            dto.Floor = vm.Floor;
-            dto.BuildingType = vm.BuildingType;
-            dto.BuiltInYear = vm.BuiltInYear;
-            dto.CreatedAt = vm.CreatedAt;
-            dto.UpdatedAt = vm.UpdatedAt;
+            var dto = new RealEstateDto()
+            {
+                Id = vm.Id,
+                Address = vm.Address,
+                SizeSqrM = vm.SizeSqrM,
+                RoomCount = vm.RoomCount,
+                Floor = vm.Floor,
+                BuildingType = vm.BuildingType,
+                BuiltInYear = vm.BuiltInYear,
+                CreatedAt = vm.CreatedAt,
+                UpdatedAt = vm.UpdatedAt,
+                Files = vm.Files,
+                Image = vm.Image
+                    .Select(x => new FileToDatabaseDto
+                    {
+                        Id = x.ImageId,
+                        ImageData = x.ImageData,
+                        ImageTitle = x.ImageTitle,
+                        RealEstateId = x.RealEstateId,
+                    }).ToArray()
+            };
 
             var result = await _realEstatesServices.Update(dto);
 
@@ -159,6 +205,17 @@ namespace ShopTARge22.Controllers
                 return NotFound();
             }
 
+            var photos = await _context.FileToDatabases
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new RealEstateImageViewModel
+                {
+                    RealEstateId = y.Id,
+                    ImageId = y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
             var vm = new RealEstateDeleteViewModel();
 
             vm.Id = realEstate.Id;
@@ -170,6 +227,7 @@ namespace ShopTARge22.Controllers
             vm.BuiltInYear = realEstate.BuiltInYear;
             vm.CreatedAt = realEstate.CreatedAt;
             vm.UpdatedAt = realEstate.UpdatedAt;
+            vm.Image.AddRange(photos);
 
             return View(vm);
         }
