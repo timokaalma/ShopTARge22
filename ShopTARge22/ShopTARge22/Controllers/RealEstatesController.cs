@@ -4,7 +4,7 @@ using ShopTARge22.Core.Dto;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
 using ShopTARge22.Models.RealEstates;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace ShopTARge22.Controllers
 {
