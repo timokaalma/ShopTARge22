@@ -120,7 +120,20 @@ namespace ShopTARge22.RealEstateTest
 
             Assert.DoesNotMatch(result.Address, createRealEstate.Address);
             Assert.NotEqual(result.UpdatedAt, createRealEstate.UpdatedAt);
-            //Assert.Equal(result.CreatedAt, createRealEstate.CreatedAt);
+        }
+
+        [Fact]
+        public async Task ShouldNot_UpdateRealEstate_WhenNotUpdateData()
+        {
+            RealEstateDto dto = MockRealEstateData();
+            var createRealestate = await Svc<IRealEstatesServices>().Create(dto);
+
+            RealEstateDto nullUpdate = MockNullRealEstate();
+            var result = await Svc<IRealEstatesServices>().Update(nullUpdate);
+
+            var nullId = nullUpdate.Id;
+
+            Assert.True(dto.Id == nullId);
         }
 
         private RealEstateDto MockRealEstateData()
@@ -155,6 +168,24 @@ namespace ShopTARge22.RealEstateTest
             };
 
             return realEstate;
+        }
+
+        private RealEstateDto MockNullRealEstate()
+        {
+            RealEstateDto nullDto = new()
+            {
+                Id = null,
+                Address = "Address123",
+                SizeSqrM = 12.5f,
+                RoomCount = 123,
+                Floor = 123,
+                BuildingType = "BuildingType123",
+                BuiltInYear = DateTime.Now.AddYears(-1),
+                CreatedAt = DateTime.Now.AddYears(-1),
+                UpdatedAt = DateTime.Now.AddYears(-1),
+            };
+
+            return nullDto;
         }
     }
 }
