@@ -5,6 +5,6 @@ namespace ShopTARge22.Core.ServiceInterface
 {
     public interface IWeatherForecastServices
     {
-        WeatherResponseRootDto GetForecast(string city);
+        Task<OpenWeatherResultDto> OpenWeatherResult(OpenWeatherResultDto dto);
     }
 }
