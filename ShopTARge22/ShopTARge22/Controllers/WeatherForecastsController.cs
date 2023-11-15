@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShopTARge22.Core.Dto;
+using ShopTARge22.Core.Dto.WeatherDtos;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Models.Forecast;
 
@@ -42,17 +42,19 @@ namespace ShopTARge22.Controllers
         {
             OpenWeatherResultDto dto = new();
             dto.City = city;
+
             _weatherForecastServices.OpenWeatherResult(dto);
             OpenWeatherViewModel vm = new();
 
-            dto.City = dto.City;
+
+
+            vm.City = dto.City;
             vm.Temp = dto.Temp;
             vm.FeelsLike = dto.FeelsLike;
             vm.Humidity = dto.Humidity;
             vm.Pressure = dto.Pressure;
             vm.WindSpeed = dto.WindSpeed;
             vm.Description = dto.Description;
-
 
             return View(vm);
         }

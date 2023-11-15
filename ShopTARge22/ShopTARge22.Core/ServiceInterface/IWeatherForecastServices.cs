@@ -1,5 +1,4 @@
-﻿using ShopTARge22.Core.Dto;
-
+﻿using ShopTARge22.Core.Dto.WeatherDtos;
 
 namespace ShopTARge22.Core.ServiceInterface
 {

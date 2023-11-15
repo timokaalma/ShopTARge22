@@ -1,6 +1,6 @@
-﻿namespace ShopTARge22.Models.Forecast
+﻿namespace ShopTARge22.Core.Dto.WeatherDtos
 {
-    public class OpenWeatherViewModel
+    public class OpenWeatherResultDto
     {
         public string City { get; set; }
 
@@ -10,7 +10,7 @@
         public double WeatherId { get; set; }
         public string Main { get; set; }
         public string Description { get; set; }
-        public string Icon { get; set; }
+        public string Icon { get; set;}
 
         public string Base { get; set; }
         public double Temp { get; set; }
@@ -32,7 +32,7 @@
         public int SysId { get; set; }
         public string Country { get; set; }
         public int Sunrise { get; set; }
-        public int Sunset { get; set; }
+        public int Sunset { get; set;}
 
         public int TimeZone { get; set; }
         public int TimeZoneId { get; set; }

@@ -1,5 +1,5 @@
 ﻿using Nancy.Json;
-using ShopTARge22.Core.Dto;
+using ShopTARge22.Core.Dto.WeatherDtos;
 using ShopTARge22.Core.ServiceInterface;
 using System.Net;
 
@@ -8,13 +8,11 @@ namespace ShopTARge22.ApplicationServices.Services
     public class WeatherForecastServices : IWeatherForecastServices
     {
 
-   
-            public async Task<OpenWeatherResultDto> OpenWeatherResult(OpenWeatherResultDto dto)
-            {
-            string idOpenWeather = "6dd8cf8205dff25ee8839d447d0b0960";
-
+        public async Task<OpenWeatherResultDto> OpenWeatherResult(OpenWeatherResultDto dto)
+        {
+            string idOpenWeather = "yourAPIKey";
             string url = $"https://api.openweathermap.org/data/2.5/weather?q={dto.City}&units=metric&appid={idOpenWeather}";
-            
+
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(url);
@@ -26,8 +24,7 @@ namespace ShopTARge22.ApplicationServices.Services
                 dto.Humidity = weatherResult.Main.Humidity;
                 dto.Pressure = weatherResult.Main.Pressure;
                 dto.WindSpeed = weatherResult.Wind.Speed;
-                dto.Description = weatherResult.Weather[0].Description;                                                                
-
+                dto.Description = weatherResult.Weather[0].Description;
             }
 
                 return dto;
