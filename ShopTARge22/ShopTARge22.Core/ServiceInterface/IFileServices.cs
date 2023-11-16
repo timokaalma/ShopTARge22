@@ -1,5 +1,6 @@
 ﻿using ShopTARge22.Core.Domain;
 using ShopTARge22.Core.Dto;
+using ShopTARge22.Core.DTO;
 
 namespace ShopTARge22.Core.ServiceInterface
 {
@@ -10,6 +11,6 @@ namespace ShopTARge22.Core.ServiceInterface
         Task<FileToApi> RemoveImageFromApi(FileToApiDto dto);
 
         void UploadFilesToDatabase(RealEstateDto dto, RealEstate domain);
-
+        Task<FileToDatabase> RemoveFilesFromDatabase(FileToDatabaseDTO dto);
     }
 }

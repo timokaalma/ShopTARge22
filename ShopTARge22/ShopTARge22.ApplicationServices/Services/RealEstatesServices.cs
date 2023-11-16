@@ -3,6 +3,9 @@ using ShopTARge22.Core.Domain;
 using ShopTARge22.Core.Dto;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
+using System.Drawing;
+using System.Net;
+using System.Xml;
 
 
 namespace ShopTARge22.ApplicationServices.Services
@@ -26,7 +29,7 @@ namespace ShopTARge22.ApplicationServices.Services
 
         public async Task<RealEstate> Create(RealEstateDto dto)
         {
-            RealEstate realEstate = new();
+            RealEstate realEstate = new RealEstate();
 
             realEstate.Id = Guid.NewGuid();
             realEstate.Address = dto.Address;
@@ -94,6 +97,6 @@ namespace ShopTARge22.ApplicationServices.Services
             await _context.SaveChangesAsync();
 
             return result;
-        }
+        } 
     }
 }

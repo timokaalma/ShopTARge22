@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using ShopTARge22.Core.Domain;
 using ShopTARge22.Core.Dto;
+using ShopTARge22.Core.DTO;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
 
@@ -47,6 +48,20 @@ namespace ShopTARge22.ApplicationServices.Services
                 }
             }
         }
+        public async Task<FileToDatabase> RemoveFilesFromDatabase(FileToDatabaseDTO dto)
+        {
+            var imageId = await _context.FileToDatabases
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+            if (imageId != null)
+            {
+                _context.FileToDatabases.Remove(imageId);
+                await _context.SaveChangesAsync();
+            }
+
+            return null;
+        }
+
 
 
 
