@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace ShopTARge22.ApplicationServices.Services
 {
-    public class RealEstatesServices : IRealEstatesServices
+    public class RealEstatesServices : IRealEstates
     {
         private readonly ShopTARge22Context _context;
         private readonly IFileServices _fileServices;
@@ -41,11 +41,7 @@ namespace ShopTARge22.ApplicationServices.Services
             realEstate.CreatedAt = DateTime.Now;
             realEstate.UpdatedAt = DateTime.Now;
 
-            if (dto.Files != null)
-            {
-                _fileServices.UploadFilesToDatabase(dto, realEstate);
-            }
-
+         
             await _context.RealEstates.AddAsync(realEstate);
             await _context.SaveChangesAsync();
 
@@ -67,15 +63,11 @@ namespace ShopTARge22.ApplicationServices.Services
             realEstate.CreatedAt = dto.CreatedAt;
             realEstate.UpdatedAt = DateTime.Now;
 
-            if (dto.Files != null)
-            {
-                _fileServices.UploadFilesToDatabase(dto, realEstate);
-            }
 
-            _context.RealEstates.Update(realEstate);
+            _context.RealEstates.Update(domain);
             await _context.SaveChangesAsync();
 
-            return realEstate;
+            return domain;
         }
 
 
@@ -90,13 +82,12 @@ namespace ShopTARge22.ApplicationServices.Services
 
         public async Task<RealEstate> Delete(Guid id)
         {
-            var result = await _context.RealEstates
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-             _context.RealEstates.Remove(result);
+            var realEstateId = await _context.RealEstates
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            _context.RealEstates.Remove(realEstateId);
             await _context.SaveChangesAsync();
 
-            return result;
+            return realEstateId;
         } 
     }
 }

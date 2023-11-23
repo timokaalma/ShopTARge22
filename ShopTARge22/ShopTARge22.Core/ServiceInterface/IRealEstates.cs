@@ -4,7 +4,7 @@ using ShopTARge22.Core.Dto;
 
 namespace ShopTARge22.Core.ServiceInterface
 {
-    public interface IRealEstatesServices
+    public interface IRealEstates
     {
         Task<RealEstate> Create(RealEstateDto dto);
         Task<RealEstate> Update(RealEstateDto dto);

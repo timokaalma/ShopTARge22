@@ -51,10 +51,6 @@
             @Html.DisplayFor(model => model.UpdatedAt)
         </div>
 
-        @foreach (var images in Model.Image)
-        {
-            <partial name="_Images" model="images" />
-        }
 
     </dl>
     <a asp-action="Index" asp-controller="realEstates" class="btn btn-danger">Index</a>
