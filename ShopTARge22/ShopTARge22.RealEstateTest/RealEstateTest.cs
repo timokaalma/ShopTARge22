@@ -23,7 +23,7 @@ namespace ShopTARge22.RealEstateTest
             realEstate.UpdatedAt = DateTime.Now;
 
             //Act
-            var result = await Svc<IRealEstates>().Create(realEstate);
+            var result = await Svc<IRealEstatesServices>().Create(realEstate);
 
             //Assert
             Assert.NotNull(result);
@@ -37,7 +37,7 @@ namespace ShopTARge22.RealEstateTest
             Guid guid = Guid.Parse("173d934d-6446-4a36-a200-515ea63d1795");
 
             //Act
-            await Svc<IRealEstates>().DetailsAsync(guid);
+            await Svc<IRealEstatesServices>().DetailsAsync(guid);
 
             //Assert
             Assert.NotEqual(wrongGuid, guid);
@@ -49,7 +49,7 @@ namespace ShopTARge22.RealEstateTest
             Guid databaseGuid = Guid.Parse("173d934d-6446-4a36-a200-515ea63d1795");
             Guid guid = Guid.Parse("173d934d-6446-4a36-a200-515ea63d1795");
 
-            await Svc<IRealEstates>().DetailsAsync(guid);
+            await Svc<IRealEstatesServices>().DetailsAsync(guid);
 
             Assert.Equal(databaseGuid, guid);
         }
@@ -61,8 +61,8 @@ namespace ShopTARge22.RealEstateTest
             RealEstateDto realEstate = MockRealEstateData();
 
 
-            var addRealEstate = await Svc<IRealEstates>().Create(realEstate);
-            var result = await Svc<IRealEstates>().Delete((Guid)addRealEstate.Id);
+            var addRealEstate = await Svc<IRealEstatesServices>().Create(realEstate);
+            var result = await Svc<IRealEstatesServices>().Delete((Guid)addRealEstate.Id);
 
             Assert.Equal(result, addRealEstate);
         }
@@ -72,10 +72,10 @@ namespace ShopTARge22.RealEstateTest
         {
             RealEstateDto realEstate = MockRealEstateData();
 
-            var realEstate1 = await Svc<IRealEstates>().Create(realEstate);
-            var realEstate2 = await Svc<IRealEstates>().Create(realEstate);
+            var realEstate1 = await Svc<IRealEstatesServices>().Create(realEstate);
+            var realEstate2 = await Svc<IRealEstatesServices>().Create(realEstate);
 
-            var result = await Svc<IRealEstates>().Delete((Guid)realEstate2.Id);
+            var result = await Svc<IRealEstatesServices>().Delete((Guid)realEstate2.Id);
 
             Assert.NotEqual(result.Id, realEstate1.Id);
         }
@@ -97,7 +97,7 @@ namespace ShopTARge22.RealEstateTest
             realEstate.BuildingType = "qwerty";
             realEstate.BuiltInYear = DateTime.Now.AddYears(1);
 
-            await Svc<IRealEstates>().Update(dto);
+            await Svc<IRealEstatesServices>().Update(dto);
 
             Assert.Equal(realEstate.Id, guid);
             Assert.DoesNotMatch(realEstate.Address, dto.Address);
@@ -109,10 +109,10 @@ namespace ShopTARge22.RealEstateTest
         public async Task Should_UpdateRealEstate_WhenUpdateDataVersion2()
         {
             RealEstateDto dto = MockRealEstateData();
-            var createRealEstate = await Svc<IRealEstates>().Create(dto);
+            var createRealEstate = await Svc<IRealEstatesServices>().Create(dto);
 
             RealEstateDto update = MockUpdateRealEstateData();
-            var result = await Svc<IRealEstates>().Update(update);
+            var result = await Svc<IRealEstatesServices>().Update(update);
 
             Assert.DoesNotMatch(result.Address, createRealEstate.Address);
             Assert.NotEqual(result.UpdatedAt, createRealEstate.UpdatedAt);
@@ -122,10 +122,10 @@ namespace ShopTARge22.RealEstateTest
         public async Task ShouldNot_UpdateRealEstate_WhenNotUpdateData()
         {
             RealEstateDto dto = MockRealEstateData();
-            var createRealestate = await Svc<IRealEstates>().Create(dto);
+            var createRealestate = await Svc<IRealEstatesServices>().Create(dto);
 
             RealEstateDto nullUpdate = MockNullRealEstate();
-            var result = await Svc<IRealEstates>().Update(nullUpdate);
+            var result = await Svc<IRealEstatesServices>().Update(nullUpdate);
 
             var nullId = nullUpdate.Id;
 

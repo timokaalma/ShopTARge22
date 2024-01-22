@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Hosting;
 using ShopTARge22.Core.Domain;
 using ShopTARge22.Core.Dto;
-using ShopTARge22.Core.DTO;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ShopTARge22.ApplicationServices.Services
 {
@@ -48,7 +48,7 @@ namespace ShopTARge22.ApplicationServices.Services
                 }
             }
         }
-        public async Task<FileToDatabase> RemoveFilesFromDatabase(FileToDatabaseDTO dto)
+        public async Task<FileToDatabase> RemoveFilesFromDatabase(FileToDatabaseDto dto)
         {
             var imageId = await _context.FileToDatabases
                 .FirstOrDefaultAsync(x => x.Id == dto.Id);
@@ -138,5 +138,23 @@ namespace ShopTARge22.ApplicationServices.Services
 
             return null;
         }
+
+        public async Task<FileToDatabase> RemoveImageFromDatabase(FileToDatabaseDto dto)
+        {
+            var ImageId = await _context.FileToDatabases
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+            var filePath = ImageId.ImageTitle;
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            _context.FileToDatabases.Remove(ImageId);
+            await _context.SaveChangesAsync();
+
+            return null;
+
+        }
+
     }
 }

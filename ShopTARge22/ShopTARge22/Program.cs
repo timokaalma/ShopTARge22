@@ -11,8 +11,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
 builder.Services.AddScoped<IFileServices, FileServices>();
-builder.Services.AddScoped<IRealEstates, RealEstatesServices>();
-builder.Services.AddScoped<IKindergartensServices, KindergartenServices>();
+builder.Services.AddScoped<IRealEstatesServices, RealEstateServices>();
+builder.Services.AddScoped<IKindergartensServices, KindergartensServices>();
 builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
 builder.Services.AddScoped<IChuckNorrisServices, ChuckNorrisServices>();
 builder.Services.AddScoped<ICocktailServices, CocktailServices>();

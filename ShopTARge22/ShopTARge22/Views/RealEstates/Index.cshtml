@@ -18,25 +18,25 @@
             <tr>
                 <th scope="col">Nr</th>
                 <th scope="col">Address</th>
-                <th scope="col">Building Type</th>
-                <th scope="col">Room Count</th>
-                <th scope="col">Size m2</th>
-                <th></th>
+                <th scope="col">SizeSqrt</th>
+                <th scope="col">BuildingType</th>
+                <th scope="col">BuiltInYear</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var realEstate in Model)
+            @foreach (var realestates in Model)
             {
                 <tr>
                     <td>@rowNumber</td>
-                    <td>@realEstate.Address</td>
-                    <td>@realEstate.BuildingType</td>
-                    <td>@realEstate.RoomCount</td>
-                    <td>@realEstate.SizeSqrM</td>
+                    <td>@realestates.Address</td>
+                    <td>@realestates.SizeSqrt</td>
+                    <td>@realestates.BuildingType</td>
+                    <td>@realestates.BuiltInYear</td>
                     <td>
-                        <a asp-action="details" asp-controller="realestates" asp-route-id="@realEstate.Id" class="btn btn-info">Details</a>
-                        <a asp-action="update" asp-controller="realestates" asp-route-id="@realEstate.Id" class="btn btn-primary">Update</a>
-                        <a asp-action="delete" asp-controller="realestates" asp-route-id="@realEstate.Id" class="btn btn-outline-danger">Delete</a>
+                        <a asp-action="details" asp-controller="realestates" asp-route-id="@realestates.Id" class="btn btn-outline-info">Details</a>
+                        <a asp-action="update" asp-controller="realestates" asp-route-id="@realestates.Id" class="btn btn-outline-secondary">Update</a>
+                        <a asp-action="delete" asp-controller="realestates" asp-route-id="@realestates.Id" class="btn btn-outline-danger">Delete</a>
+
                     </td>
                 </tr>
 

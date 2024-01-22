@@ -17,10 +17,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShopTARge22.ApplicationServices\ShopTARge22.ApplicationServices.csproj" />
+    <ProjectReference Include="..\ShopTARge22.Core\ShopTARge22.Core.csproj" />
     <ProjectReference Include="..\ShopTARge22.Data\ShopTARge22.Data.csproj" />
+    <ProjectReference Include="..\ShopTARge22.RealEstateTest\ShopTARge22.RealEstateTest.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+	<Folder Include="multipleFileUpload\" />
     <Folder Include="wwwroot\Files\" />
   </ItemGroup>
 
