@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShopTARge22.Models.Kindergarten.KindergartensIndexViewModel>
+﻿@model IEnumerable<ShopTARge22.Models.Kindergartens.KindergartensIndexViewModel>
 @{
     int rowNumber = 1;
 }
@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var kindergarten in Model)
+            @foreach (var kindergartens in Model)
             {
                 <tr>
                     <td>@rowNumber</td>
@@ -32,7 +32,7 @@
                     <td>@kindergartens.ChildrenCount</td>
                     <td>@kindergartens.KindergartenName</td>
                     <td>@kindergartens.Teacher</td>
-                    N
+
                     <td>
                         <a asp-action="details" asp-controller="kindergartens" asp-route-id="@kindergartens.Id" class="btn btn-info">Details</a>
                         <a asp-action="update" asp-controller="kindergartens" asp-route-id="@kindergartens.Id" class="btn btn-primary">Update</a>

@@ -242,12 +242,12 @@ namespace ShopTARge22.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveImage(ImageViewModel vm)
         {
-            var dto = new FileToApiDto()
+            var dto = new FileToDatabaseDto()
             {
                 Id = vm.ImageId
             };
 
-            var image = await _fileServices.RemoveImageFromApi(dto);
+            var image = await _fileServices.RemoveFilesFromDatabase(dto);
 
             if (image == null)
             {

@@ -18,7 +18,6 @@ builder.Services.AddScoped<IChuckNorrisServices, ChuckNorrisServices>();
 builder.Services.AddScoped<ICocktailServices, CocktailServices>();
 
 
-
 builder.Services.AddDbContext<ShopTARge22Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

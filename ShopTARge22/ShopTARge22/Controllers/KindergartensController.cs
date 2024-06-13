@@ -47,7 +47,7 @@ namespace ShopTARge22.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(KindergartenCreateUpdateViewModel vm)
         {
-            var dto = new KindergartenDTO()
+            var dto = new KindergartenDto()
             {
                 Id = vm.Id,
                 GroupName = vm.GroupName,
@@ -93,7 +93,7 @@ namespace ShopTARge22.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(KindergartenCreateUpdateViewModel vm)
         {
-            var dto = new KindergartenDTO()
+            var dto = new KindergartenDto()
             {
                 Id = vm.Id,
                 GroupName = vm.GroupName,
