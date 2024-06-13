@@ -23,9 +23,9 @@ namespace ShopTARge22.ApplicationServices.Services
             _context = context;
         }
 
-        public async Task<Kindergartens> Create(KindergartenDTO dto)
+        public async Task<Kindergarten> Create(KindergartenDto dto)
         {
-            Kindergartens kindergarten = new Kindergartens();
+            Kindergarten kindergarten = new Kindergarten();
 
             kindergarten.Id = Guid.NewGuid();
             kindergarten.GroupName = dto.GroupName;
@@ -41,7 +41,7 @@ namespace ShopTARge22.ApplicationServices.Services
             return kindergarten;
         }
 
-        public async Task<Kindergartens> DetailsAsync(Guid id)
+        public async Task<Kindergarten> DetailsAsync(Guid id)
         {
             var result = await _context.Kindergartens
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -49,9 +49,9 @@ namespace ShopTARge22.ApplicationServices.Services
             return result;
         }
 
-        public async Task<Kindergartens> Update(KindergartenDTO dto)
+        public async Task<Kindergarten> Update(KindergartenDto dto)
         {
-            Kindergartens domain = new();
+            Kindergarten domain = new();
 
             domain.Id = dto.Id;
             domain.GroupName = dto.GroupName;
@@ -67,7 +67,7 @@ namespace ShopTARge22.ApplicationServices.Services
             return domain;
         }
 
-        public async Task<Kindergartens> Delete(Guid id)
+        public async Task<Kindergarten> Delete(Guid id)
         {
             var kindergartenId = await _context.Kindergartens
                 .FirstOrDefaultAsync(x => x.Id == id);
