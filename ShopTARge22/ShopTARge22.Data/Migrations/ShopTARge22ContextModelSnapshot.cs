@@ -62,7 +62,7 @@ namespace ShopTARge22.Data.Migrations
                     b.ToTable("FileToDatabases");
                 });
 
-            modelBuilder.Entity("ShopTARge22.Core.Domain.Kindergartens", b =>
+            modelBuilder.Entity("ShopTARge22.Core.Domain.Kindergarten", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,6 +79,10 @@ namespace ShopTARge22.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KindergartenName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -108,7 +112,7 @@ namespace ShopTARge22.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("BuiltInYear")
+                    b.Property<DateTime>("BuiltInYear")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedAt")
