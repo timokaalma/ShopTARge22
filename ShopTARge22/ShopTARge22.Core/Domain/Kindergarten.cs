@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopTARge22.Core.Domain
 {
-    public class Kindergartens
+    public class Kindergarten
     {
         [Key]
         public Guid? Id { get; set; }
@@ -18,5 +18,6 @@ namespace ShopTARge22.Core.Domain
 
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public string Message { get; set; }
     }
 }
