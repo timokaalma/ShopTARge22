@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShopTARge22.Models.RealEstates.RealEstateIndexViewModel>
+﻿@model IEnumerable<ShopTARge22.Models.RealEstates.RealEstatesIndexViewModel>
 
 @{
     int rowNumber = 1;
@@ -18,7 +18,7 @@
             <tr>
                 <th scope="col">Nr</th>
                 <th scope="col">Address</th>
-                <th scope="col">SizeSqrt</th>
+                <th scope="col">SizeSqrM</th>
                 <th scope="col">BuildingType</th>
                 <th scope="col">BuiltInYear</th>
             </tr>
@@ -29,7 +29,7 @@
                 <tr>
                     <td>@rowNumber</td>
                     <td>@realestates.Address</td>
-                    <td>@realestates.SizeSqrt</td>
+                    <td>@realestates.SizeSqrM</td>
                     <td>@realestates.BuildingType</td>
                     <td>@realestates.BuiltInYear</td>
                     <td>
