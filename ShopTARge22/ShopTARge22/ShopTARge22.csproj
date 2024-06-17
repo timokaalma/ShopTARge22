@@ -25,6 +25,7 @@
   <ItemGroup>
 	<Folder Include="multipleFileUpload\" />
     <Folder Include="wwwroot\Files\" />
+	<Folder Include="Views\AccuWeatherForecasts\" />
   </ItemGroup>
 
 </Project>
